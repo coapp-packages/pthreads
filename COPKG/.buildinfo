@@ -1,0 +1,25 @@
+#product-info  {
+    product-name: "Coin-Cbc";
+    version: "2.7";
+    original-source-location: "ftp://sourceware.org/pub/pthreads-win32";
+    original-source-website: "http://sourceware.org/pthreads-win32/";
+    license: "LGPL";
+    packager: "Petter Strandmark";
+}
+
+
+x64  {
+    compiler: vc10-x64 ;
+ 
+    targets: { 
+				//Libraries
+				"pthreadVC2.lib",
+				
+				//DLL
+				"pthreadVC2.dll",
+			} ;
+ 
+    build-command: "nmake clean VC ";
+
+    clean-command: "nmake clean";
+}
