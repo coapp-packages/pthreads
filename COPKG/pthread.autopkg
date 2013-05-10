@@ -1,0 +1,218 @@
+@import @"version.inc";
+
+configurations {
+		
+};
+
+nuget {
+	// the nuspec file metadata. Gets created/updated on build
+	nuspec {
+		id = pthread;
+		version : ${package-version};
+		title: Pthread Library;
+		authors: {Pthread Project, Tim Rogers};
+		owners: {CoApp Project, Garrett Serack, Tom Hanrahan};
+		licenseUrl: "https://raw.github.com/coapp-packages/pthread/master/COPYING.LIB";
+		projectUrl: "http://github.com/coapp-packages/pthread";
+		iconUrl: http://www.sourceware.org/pthreads-win32/images/Pthreads-win32-small.gif;
+		requireLicenseAcceptance:false;
+		summary: Pthread - API for writing multithreaded applications;
+		description: @"A library for writing multithreaded applications.
+		Pthread homepage: http://www.sourceware.org/pthreads-win32/";
+		releaseNotes: "Release of pthread libraries.";
+		copyright: Copyright 2013;
+		tags: { pthread, libpthread, native, CoApp };
+
+	};
+
+	// the files that go into the content folders
+	// (inserted into the nuspec file)
+	files {
+		include: { ..\pthread.h };
+
+		docs: { 
+            ..\manual\*
+        };
+    
+		[Win32,v110,dynamic,cdecl,debug] { 
+			lib: { .\output\v110\win32\debug\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v110\win32\debug\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v110\win32\debug\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+
+		[x64,v110,dynamic,cdecl,debug] {
+			lib: { .\output\v110\x64\debug\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v110\x64\debug\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v110\x64\debug\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+		
+		[Win32,v110,static,cdecl,debug] {
+			lib: { .\output\v110\win32\debug\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[x64,v110,static,cdecl,debug] {
+			lib: { .\output\v110\x64\debug\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[Win32,v110,static,stdcall,debug] {
+			lib: { .\output\v110\win32\debug\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[x64,v110,static,stdcall,debug] {
+			lib: { .\output\v110\x64\debug\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[Win32,v110,dynamic,stdcall,debug] {
+			lib: { .\output\v110\win32\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v110\win32\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v110\win32\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[x64,v110,dynamic,stdcall,debug] {
+			lib: { .\output\v110\x64\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v110\x64\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v110\x64\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[Win32,v100,dynamic,cdecl,debug] { 
+			lib: { .\output\v100\win32\debug\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v100\win32\debug\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v100\win32\debug\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+
+		[x64,v100,dynamic,cdecl,debug] {
+			lib: { .\output\v100\x64\debug\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v100\x64\debug\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v100\x64\debug\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+		
+		[Win32,v100,static,cdecl,debug] {
+			lib: { .\output\v100\win32\debug\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[x64,v100,static,cdecl,debug] {
+			lib: { .\output\v100\x64\debug\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[Win32,v100,static,stdcall,debug] {
+			lib: { .\output\v100\win32\debug\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[x64,v100,static,stdcall,debug] {
+			lib: { .\output\v100\x64\debug\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[Win32,v100,dynamic,stdcall,debug] {
+			lib: { .\output\v100\win32\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v100\win32\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v100\win32\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[x64,v100,dynamic,stdcall,debug] {
+			lib: { .\output\v100\x64\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v100\x64\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v100\x64\debug\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[Win32,v110,dynamic,cdecl,release] { 
+			lib: { .\output\v110\win32\release\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v110\win32\release\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v110\win32\release\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+
+		[x64,v110,dynamic,cdecl,release] {
+			lib: { .\output\v110\x64\release\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v110\x64\release\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v110\x64\release\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+		
+		[Win32,v110,static,cdecl,release] {
+			lib: { .\output\v110\win32\release\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[x64,v110,static,cdecl,release] {
+			lib: { .\output\v110\x64\release\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[Win32,v110,static,stdcall,release] {
+			lib: { .\output\v110\win32\release\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[x64,v110,static,stdcall,release] {
+			lib: { .\output\v110\x64\release\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[Win32,v110,dynamic,stdcall,release] {
+			lib: { .\output\v110\win32\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v110\win32\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v110\win32\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[x64,v110,dynamic,stdcall,release] {
+			lib: { .\output\v110\x64\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v110\x64\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v110\x64\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[Win32,v100,dynamic,cdecl,release] { 
+			lib: { .\output\v100\win32\release\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v100\win32\release\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v100\win32\release\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+
+		[x64,v100,dynamic,cdecl,release] {
+			lib: { .\output\v100\x64\release\DynamicLibrary\cdecl\lib\libpthread.lib };
+			bin: { .\output\v100\x64\release\DynamicLibrary\cdecl\lib\libpthread.dll };
+            symbols += { .\output\v100\x64\release\DynamicLibrary\cdecl\lib\libpthread.pdb };
+		}
+		
+		[Win32,v100,static,cdecl,release] {
+			lib: { .\output\v100\win32\release\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[x64,v100,static,cdecl,release] {
+			lib: { .\output\v100\x64\release\StaticLibrary\cdecl\lib\libpthread-static.lib };
+		}
+
+		[Win32,v100,static,stdcall,release] {
+			lib: { .\output\v100\win32\release\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[x64,v100,static,stdcall,release] {
+			lib: { .\output\v100\x64\release\StaticLibrary\stdcall\lib\libpthread-static-stdcall.lib };
+		}
+
+		[Win32,v100,dynamic,stdcall,release] {
+			lib: { .\output\v100\win32\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v100\win32\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v100\win32\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+		[x64,v100,dynamic,stdcall,release] {
+			lib: { .\output\v100\x64\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.lib };
+			bin: { .\output\v100\x64\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.dll };
+            symbols += { .\output\v100\x64\release\DynamicLibrary\stdcall\lib\libpthread-stdcall.pdb };
+		}
+
+
+	};
+
+	// the VC++ .props file that gets generated and inserted into the ${d_content} folder
+	props { 
+		// we're going to generate a number of properties anyway. 
+        // so even if the packager doesn't specify the props object 
+        // we're going to make this file.
+	};
+
+	// the VC++ .targets file that gets generated and inserted into the ${d_content} folder
+	targets {
+		// every configuration needs to reference the include directories.
+		Defines += HAS_pthread;
+		[dynamic]
+			Defines += BZ_IMPORT;
+		[stdcall]
+			Defines += BZ_WAPI;
+			
+	};
+}
+

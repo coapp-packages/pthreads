@@ -24,27 +24,76 @@
     <RootNamespace>pthread</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="ConfigurationSettings">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CallingConvention>Cdecl</CallingConvention>
+    <LibName>libpthread</LibName>
+  </PropertyGroup>
+  <Target Name="Info" BeforeTargets="Build">
+    <Message Text="  Configuration     :  '$(Configuration)'" />
+    <Message Text="  PlatformToolset   :  '$(PlatformToolset)'" />
+    <Message Text="  Platform          :  '$(Platform)'" />
+    <Message Text="  ConfigurationType :  '$(ConfigurationType)'" />
+    <Message Text="  CallingConvention :  '$(CallingConvention)'" />
+  </Target>
+  <!--
   <PropertyGroup Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
-    <UseDebugLibraries>true</UseDebugLibraries>
+  -->
+  <PropertyGroup Label="Configuration">
+    <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
+    <UseDebugLibraries Condition="'$(Configuration)'!='Debug'">false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <!--
   <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" >
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
+  <PropertyGroup>
+    <OutNameSuffix Condition="'$(CallingConvention)|$(ConfigurationType)'=='Cdecl|DynamicLibrary'"></OutNameSuffix>
+    <OutNameSuffix Condition="'$(CallingConvention)|$(ConfigurationType)'=='Cdecl|StaticLibrary'">-static</OutNameSuffix>
+    <OutNameSuffix Condition="'$(CallingConvention)|$(ConfigurationType)'=='Cdecl|ltcg'">-static-ltcg</OutNameSuffix>
+    <OutNameSuffix Condition="'$(CallingConvention)|$(ConfigurationType)'=='stdcall|DynamicLibrary'">-stdcall</OutNameSuffix>
+    <OutNameSuffix Condition="'$(CallingConvention)|$(ConfigurationType)'=='stdcall|StaticLibrary'">-static-stdcall</OutNameSuffix>
+    <OutNameSuffix Condition="'$(CallingConvention)|$(ConfigurationType)'=='stdcall|ltcg'">-static-stdcall-ltcg</OutNameSuffix>
+    <OutName>$(LibName)$(OutNameSuffix)</OutName>
+    <ProjectRootDir Condition="'$(SolutionDir)' != ''">$(SolutionDir)</ProjectRootDir> 
+    <ProjectRootDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)..\</ProjectRootDir> 
+    <OutDir>$(ProjectRootDir)Output\$(PlatformToolset)\$(Platform)\$(Configuration)\$(ConfigurationType)\$(CallingConvention)\</OutDir> 
+    <IntDir>$(ProjectRootDir)Intermediate\$(PlatformToolset)\$(Platform)\$(Configuration)\$(ConfigurationType)\$(CallingConvention)\</IntDir>
+    <OutBinDir>$(OutDir)bin\</OutBinDir>
+    <OutLibDir>$(OutDir)lib\</OutLibDir>
+    <TargetName>lib\$(OutName)</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+	  <AdditionalIncludeDirectories>..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -74,6 +123,39 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+<!--
+pthread $(VERSION) :LIBRARY: attr.c barrier.c cancel.c cleanup.c condvar.c \
+	create.c dll.c exit.c fork.c global.c misc.c mutex.c private.c \
+	rwlock.c sched.c semaphore.c spin.c sync.c tsd.c nonportable.c
+-->
+  <ItemGroup>
+    <ClInclude Include="..\pthread.h" />
+	<ClInclude Include="..\implement.h" />
+    <ClCompile Include="..\attr.c" />
+    <ClCompile Include="..\barrier.c" />
+    <ClCompile Include="..\cancel.c" />
+    <ClCompile Include="..\cleanup.c" />
+    <ClCompile Include="..\condvar.c" />
+    <ClCompile Include="..\create.c" />
+    <ClCompile Include="..\dll.c" />
+	<ClCompile Include="..\exit.c" />
+    <ClCompile Include="..\fork.c" />
+    <ClCompile Include="..\global.c" />
+    <ClCompile Include="..\misc.c" />
+    <ClCompile Include="..\mutex.c" />
+    <ClCompile Include="..\private.c" />
+    <ClCompile Include="..\rwlock.c" />
+	<ClCompile Include="..\sched.c" />
+    <ClCompile Include="..\semaphore.c" />
+    <ClCompile Include="..\spin.c" />
+    <ClCompile Include="..\sync.c" />
+    <ClCompile Include="..\tsd.c" />
+	<ClCompile Include="..\nonportable.c" />
+	<ClCompile Include="..\errno.c" />
+	<ClCompile Include="..\signal.c" />
+	<ClCompile Include="..\autostatic.c" >
+	</ClCompile>
+  </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
