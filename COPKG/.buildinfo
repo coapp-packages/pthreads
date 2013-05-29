@@ -1,25 +1,37 @@
-#product-info  {
-    product-name: "Coin-Cbc";
-    version: "2.7";
-    original-source-location: "ftp://sourceware.org/pub/pthreads-win32";
-    original-source-website: "http://sourceware.org/pthreads-win32/";
-    license: "LGPL";
-    packager: "Petter Strandmark";
-}
+@import default_tools;
 
+vc_v100_win32 {
+    .SetEnvironmentFromTarget.Target = "VC_V100_X86";
+};
+vc_v110_win32 {
+    .SetEnvironmentFromTarget.Target = "VC_V110_X86";
+};
 
-x64  {
-    compiler: vc10-x64 ;
- 
-    targets: { 
-				//Libraries
-				"pthreadVC2.lib",
-				
-				//DLL
-				"pthreadVC2.dll",
-			} ;
- 
-    build-command: "nmake clean VC ";
+default {
+    ("V110,V100", "win32,X64", "Release,Debug", "Dynamic,Static", "cdecl,stdcall") => {
+        .PushEnvironment{};
+        .LoadSystemEnvironment{};
+        .Message.Text = @"envTarg = vc_${0}_${1}   --  ${2}  ${3}  ${4}";
+        
+        .SetEnvironmentFromTarget.Target = "VC_${0}_${1}";
+        
+        .Message.Text = @"EnvValid = $(IsEnvironmentValid)";
+        
+        .Exec {
+            Condition="$(IsEnvironmentValid)";
+            Command = @"msbuild pthread.vcxproj /p:PlatformToolset=${0};Platform=${1};Configuration=${2};ConfigurationType=${3}Library;CallingConvention=${4}";
+        };
+        
+        .PopEnvironment{};
+    };
+    
+};
 
-    clean-command: "nmake clean";
-}
+clean {
+    .RemoveDir.Directories = @".\intermediate";
+};
+
+nuke {
+    .RemoveDir.Directories = @".\output";
+};
+
