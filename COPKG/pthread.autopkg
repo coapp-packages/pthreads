@@ -3,7 +3,7 @@ nuget {
 	// the nuspec file metadata. Gets created/updated on build
 	nuspec {
 		id = pthreads;
-		version : 2.9.1.0;
+		version : 2.9.1.2;
 		title: Pthreads Library;
 		authors: {Pthreads contributors, Tim Rogers};
 		owners: {CoApp Project, Garrett Serack, Tom Hanrahan};

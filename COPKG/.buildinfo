@@ -1,12 +1,5 @@
 @import default_tools;
 
-vc_v100_win32 {
-    .SetEnvironmentFromTarget.Target = "VC_V100_X86";
-};
-vc_v110_win32 {
-    .SetEnvironmentFromTarget.Target = "VC_V110_X86";
-};
-
 default {
     ("V110,V100", "win32,X64", "Release,Debug", "Dynamic,Static", "cdecl,stdcall") => {
         .PushEnvironment{};
