@@ -12,7 +12,7 @@ default {
         
         .Exec {
             Condition="$(IsEnvironmentValid)";
-            Command = @"msbuild pthread.vcxproj /p:PlatformToolset=${0};Platform=${1};Configuration=${2};ConfigurationType=${3}Library;CallingConvention=${4}";
+            Command = @"msbuild pthreads.vcxproj /p:PlatformToolset=${0};Platform=${1};Configuration=${2};ConfigurationType=${3}Library;CallingConvention=${4}";
         };
         
         .PopEnvironment{};
